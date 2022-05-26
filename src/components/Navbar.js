@@ -2,8 +2,12 @@ import RB_Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 
-export default function Navbar() {
-  
+const config = require('../utils/config');
+
+export default function Navbar({ loggedIn }) {
+  const loginUrl = `${config.JACCOUNT_URL}/authorize?response_type=code&scope=basic lessons classes&client_id=${config.JACCOUNT_ID}&redirect_uri=${config.CLIENT_URL}`;
+  const logoutUrl = `${config.JACCOUNT_URL}/logout?client_id=${config.JACCOUNT_ID}&post_logout_redirect_uri=${config.CLIENT_URL}`;
+
   return (
     <RB_Navbar bg="dark" variant="dark">
       <Container>
@@ -12,10 +16,15 @@ export default function Navbar() {
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/about">About</Nav.Link>
         </Nav>
+        {loggedIn ?
         <Nav>
           <Nav.Link href="/new-review">New Review</Nav.Link>
-          <Nav.Link href="/login">JAccount Login</Nav.Link>
+           <Nav.Link href={logoutUrl}>Logout</Nav.Link> 
         </Nav>
+        : 
+        <Nav>
+        <Nav.Link href={loginUrl}>JAccount Login</Nav.Link>
+        </Nav>}
       </Container>
     </RB_Navbar>
   );

@@ -6,7 +6,6 @@ import Navbar from "./Navbar";
 export default function AboutPage() {
   return (
     <>
-      <Navbar />
       <Container className="py-3">
         <p>
           JCourses is a web app for SJTU undergrads to search for and review courses. It is our group project for EE458: Software Engineering.
