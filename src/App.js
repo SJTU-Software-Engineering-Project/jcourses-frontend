@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Homepage from "./components/Homepage";
 import CoursePage from "./components/CoursePage";
 import CreateReviewPage from "./components/CreateReviewPage";
+import AboutPage from "./components/AboutPage";
 
 function App() {
   return (
@@ -10,6 +11,8 @@ function App() {
       <Routes>
 
         <Route path="/" element={<Homepage />} />
+
+        <Route path="/about" element={<AboutPage />} />
 
         <Route path="courses/:courseId">
           <Route index element={<CoursePage />} />
