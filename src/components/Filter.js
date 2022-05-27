@@ -2,23 +2,36 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import React from 'react';
+import axios from 'axios';
 
-export default function Filter() {
-  const courseCode = React.createRef();
+import { API_URL } from '../utils/config';
 
-  const handleSubmit = event => {
+export default function Filter(props) {
+  const searchString = React.createRef();
+
+  const handleSubmit = async event => {
     event.preventDefault();
-    console.log(courseCode.current.value);
+    const query = searchString.current.value;
+    props.setIsLoading(true);
+    try {
+      const response = await axios.get(`${API_URL}/courses?q=${query}`);
+      props.setCourses(response.data.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      props.setIsLoading(false);
+    }
   };
   return (
-    <Container className='mx-auto my-3 p-3 border border-2 rounded-3'>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className='mb-3 p-1 border border-1'>
-          <Form.Label>Course Code</Form.Label>
-          <Form.Control ref={courseCode} placeholder="Enter course code" />
-        </Form.Group>
+    <Container className='p-3 border border-2 rounded-3'>
+      <Form className='d-flex flex-row' onSubmit={handleSubmit}>
+        <Form.Control
+          ref={searchString}
+          placeholder="course code, course name, or teacher name"
+        />
+        
         <Button type='submit'>
-          Submit
+          Search
         </Button>
       </Form>
     </Container>
