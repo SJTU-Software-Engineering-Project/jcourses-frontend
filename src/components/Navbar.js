@@ -19,7 +19,8 @@ export default function Navbar({ loggedIn }) {
         {loggedIn ?
         <Nav>
           <Nav.Link href="/new-review">New Review</Nav.Link>
-           <Nav.Link href={logoutUrl}>Logout</Nav.Link> 
+          <Nav.Link href="/user">My Reviews</Nav.Link>
+          <Nav.Link href={logoutUrl}>Logout</Nav.Link> 
         </Nav>
         : 
         <Nav>

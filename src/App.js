@@ -6,6 +6,7 @@ import Homepage from "./components/Homepage";
 import CoursePage from "./components/CoursePage";
 import CreateReviewPage from "./components/CreateReviewPage";
 import AboutPage from "./components/AboutPage";
+import UserPage from "./components/UserPage";
 import LoginRedirectPage from "./components/LoginRedirectPage";
 import LogoutRedirectPage from "./components/LogoutRedirectPage";
 
@@ -36,6 +37,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
 
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/user" element={<UserPage />} />
         <Route path="/loginRedirect" element={<LoginRedirectPage setLoggedIn={setLoggedIn}/>} />
         <Route path="/logoutRedirect" element={<LogoutRedirectPage setLoggedIn={setLoggedIn}/>} />
 
