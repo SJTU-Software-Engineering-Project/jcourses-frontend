@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import Container from "react-bootstrap/Container";
-import RatingList from "./RatingList";
+import UserRatingList from "./UserRatingList";
 
 
 const config = require('../utils/config');
@@ -35,7 +35,7 @@ export default function UserPage() {
     return (
         <Container className="p-3 border rounded-3">
         <h1>My Reviews</h1>
-        <RatingList isLoading={isLoading} ratings={ratings} parent='user'/>
+        <UserRatingList isLoading={isLoading} ratings={ratings} />
       </Container>
     );
   };

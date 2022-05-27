@@ -11,6 +11,7 @@ import LoginRedirectPage from "./components/LoginRedirectPage";
 import LogoutRedirectPage from "./components/LogoutRedirectPage";
 
 import Navbar from "./components/Navbar";
+import CourseSelector from "./components/CourseSelector";
 
 const config = require('./utils/config');
 
@@ -46,7 +47,7 @@ function App() {
           <Route path="new-review" element={<CreateReviewPage />} /> {/* Route for writing a new review with auto-filled course info */}
         </Route>
 
-        <Route path="new-review" element={<CreateReviewPage />} /> {/* Route for writing a review without auto-filled course info */}
+        <Route path="new-review" element={<CourseSelector />} /> {/* Route for writing a review without auto-filled course info */}
         
       </Routes>
     </BrowserRouter>

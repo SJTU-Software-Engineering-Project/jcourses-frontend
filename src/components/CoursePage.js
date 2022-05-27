@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
-import { useParams } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
 import ListGroup from "react-bootstrap/ListGroup";
 
@@ -12,6 +13,8 @@ export default function CoursePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [course, setCourse] = useState();
   const [ratings, setRatings] = useState([]);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
@@ -28,6 +31,11 @@ export default function CoursePage() {
       .catch(error => console.log(error));
     
   }, [courseId]);
+
+  function handleClickButton() {
+    const path = location.pathname + '/new-review';
+    navigate(path);
+  }
 
   return (
     <Container className="m-3 p-3">
@@ -60,6 +68,7 @@ export default function CoursePage() {
                 ))
               }
             </ListGroup>
+            <Button variant="primary" onClick={handleClickButton}>Write Review for this Course</Button>
           </>
         )
       }

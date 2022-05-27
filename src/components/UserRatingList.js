@@ -2,7 +2,7 @@ import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
 
-export default function RatingList(props) {
+export default function UserRatingList(props) {
   return (
     <Container className="p-3 border rounded-3">
       {
@@ -23,7 +23,7 @@ export default function RatingList(props) {
             (
                 <>
                     <p>No reviews yet!</p>
-                    {props.parent === 'user' && <a href='new-review'>Create one here.</a>}
+                    <a href='new-review'>Create one here.</a>
                 </>
             )
         )
