@@ -14,20 +14,18 @@ export default function CoursePage() {
   const [ratings, setRatings] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
-      setIsLoading(true);
-      try {
-        let response = await axios.get(`${API_URL}/courses/${courseId}`);
-        setCourse(response.data.data);
-        response = await axios.get(`${API_URL}/courses/${courseId}/ratings`);
-        setRatings(response.data.data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
-      }
+    setIsLoading(true);
+    async function fetchCourse() {
+      const response = await axios.get(`${API_URL}/courses/${courseId}`);
+      setCourse(response.data.data);
     }
-    fetchData();
+    async function fetchCourseRatings() {
+      const response = await axios.get(`${API_URL}/courses/${courseId}/ratings`);
+      setRatings(response.data.data);
+    }
+    Promise.all([fetchCourse(), fetchCourseRatings()])
+      .then(() => setIsLoading(false))
+      .catch(error => console.log(error));
     
   }, [courseId]);
 
@@ -50,7 +48,7 @@ export default function CoursePage() {
             <ListGroup>
               {
                 ratings.map(rating => (
-                  <ListGroup.Item>
+                  <ListGroup.Item key={rating._id}>
                     <ListGroup horizontal>
                       <ListGroup.Item>Overall: {rating.overall}</ListGroup.Item>
                       <ListGroup.Item>Workload: {rating.workload}</ListGroup.Item>
