@@ -5,8 +5,8 @@ import Nav from 'react-bootstrap/Nav';
 const config = require('../utils/config');
 
 export default function Navbar({ loggedIn }) {
-  const loginUrl = `${config.JACCOUNT_URL}/authorize?response_type=code&scope=basic lessons classes&client_id=${config.JACCOUNT_ID}&redirect_uri=${config.CLIENT_URL}`;
-  const logoutUrl = `${config.JACCOUNT_URL}/logout?client_id=${config.JACCOUNT_ID}&post_logout_redirect_uri=${config.CLIENT_URL}`;
+  const loginUrl = `${config.JACCOUNT_URL}/authorize?response_type=code&scope=basic lessons classes&client_id=${config.JACCOUNT_ID}&redirect_uri=${config.CLIENT_URL}/loginRedirect`;
+  const logoutUrl = `${config.JACCOUNT_URL}/logout?client_id=${config.JACCOUNT_ID}&post_logout_redirect_uri=${config.CLIENT_URL}/logOutRedirect`;
 
   return (
     <RB_Navbar bg="dark" variant="dark">
