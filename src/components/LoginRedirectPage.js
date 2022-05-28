@@ -6,7 +6,7 @@ const config = require('../utils/config');
 
 export default function LoginRedirectPage({setLoggedIn}) {
     const navigate = useNavigate();
-    const [msg, setMsg] = useState("Loggin in...")
+    const [msg, setMsg] = useState("Loggin in...");
 
     useEffect(() => {
         const code = new URLSearchParams(window.location.search).get(
@@ -25,7 +25,7 @@ export default function LoginRedirectPage({setLoggedIn}) {
                 localStorage.setItem('access_token',res.data["access_token"]);
                 localStorage.setItem('refresh_token',res.data["refresh_token"]);
                 setLoggedIn(true);
-                navigate('/');
+                navigate(-1);
             })
             .catch((error) => {
                 console.log("error " + error);

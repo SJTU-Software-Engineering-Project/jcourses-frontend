@@ -42,7 +42,7 @@ function App() {
         <Route path="/logoutRedirect" element={<LogoutRedirectPage setLoggedIn={setLoggedIn}/>} />
 
         <Route path="courses/:courseId">
-          <Route index element={<CoursePage />} />
+          <Route index element={<CoursePage loggedIn={loggedIn}/>} />
           <Route path="new-review" element={<CreateReviewPage />} /> {/* Route for writing a new review with auto-filled course info */}
         </Route>
 

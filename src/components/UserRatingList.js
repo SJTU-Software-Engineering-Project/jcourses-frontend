@@ -19,7 +19,12 @@ export default function UserRatingList(props) {
               <ListGroup>
               {
                 props.ratings.map(rating => (
-                  <RatingCard rating={rating} key={rating._id} title={config.COURSE_ID_TO_NAME[rating.courseId]}/>
+                  <RatingCard 
+                  rating={rating} 
+                  key={rating._id} 
+                  title={config.COURSE_ID_TO_NAME[rating.courseId] || "Unkown"} 
+                  isUser={true}
+                  />
                 )) 
               }
               </ListGroup>

@@ -3,7 +3,6 @@ import axios from 'axios';
 import Container from "react-bootstrap/Container";
 import UserRatingList from "./UserRatingList";
 
-
 const config = require('../utils/config');
 
 export default function UserPage() {
