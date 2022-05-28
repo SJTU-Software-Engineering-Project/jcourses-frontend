@@ -15,6 +15,7 @@ export default function Filter(props) {
     props.setIsLoading(true);
     try {
       const response = await axios.get(`${API_URL}/courses?q=${query}`);
+      console.log(response.data.data)
       props.setCourses(response.data.data);
     } catch (error) {
       console.log(error);
@@ -23,14 +24,14 @@ export default function Filter(props) {
     }
   };
   return (
-    <Container className='p-3 border border-2 rounded-3'>
+    <Container className='p-3 mb-3 border rounded-3'>
       <Form className='d-flex flex-row' onSubmit={handleSubmit}>
         <Form.Control
           ref={searchString}
           placeholder="course code, course name, or teacher name"
         />
         
-        <Button type='submit'>
+        <Button className='mx-3' type='submit'>
           Search
         </Button>
       </Form>

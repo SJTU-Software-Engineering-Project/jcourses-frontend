@@ -9,7 +9,7 @@ export default function Homepage() {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <Container className="m-3 p-3">
+    <Container className="mx-auto mt-3 p-3">
       <Filter setCourses={setCourses} setIsLoading={setIsLoading} />
       <CourseList courses={courses} isLoading={isLoading} />
     </Container>

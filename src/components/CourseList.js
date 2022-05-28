@@ -14,16 +14,26 @@ export default function CourseList(props) {
           </Spinner>
         ) : (
           props.courses.map(course => 
-            <Card className="p-3" key={course._id}>
-              <Card.Title>
+            <Card key={course._id}>
+              <Card.Header className="d-flex justify-content-between align-items-center">
                 <Link
                   className="text-decoration-none"
                   to={`/courses/${course._id}`}
                 >
                   {course.code}: {course.name} ({course.teacher})
                 </Link>
-              </Card.Title>
-              <Card.Body>
+                {Math.round(course.overall*100) / 100}
+              </Card.Header>
+              <Card.Body className="d-flex justify-content-between">
+                <Card.Subtitle className="text-muted">
+                  {course.credits} credits &nbsp;&nbsp;&nbsp; {course.organize}
+                </Card.Subtitle>
+                <Card.Subtitle className="text-muted">
+                  {course.ratingCount} reviews
+                </Card.Subtitle>
+              </Card.Body>
+              
+              {/* <Card.Body>
                 Credits: {course.credits}
                 <ListGroup horizontal>
                   <ListGroup.Item>Overall: {course.overall}</ListGroup.Item>
@@ -31,7 +41,7 @@ export default function CourseList(props) {
                   <ListGroup.Item>Easiness: {course.easiness}</ListGroup.Item>
                   <ListGroup.Item>Usefulness: {course.userfulness}</ListGroup.Item>
                 </ListGroup>
-              </Card.Body>
+              </Card.Body> */}
             </Card>)
         )
       }
