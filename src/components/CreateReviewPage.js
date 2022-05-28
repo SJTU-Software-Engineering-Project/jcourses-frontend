@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Container } from 'react-bootstrap';
 import axios from 'axios';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import StarRating from './StarRating';
 
 const config = require('../utils/config');
@@ -26,6 +26,7 @@ export default function CreateReviewPage() {
 	const [usefulnessValidate, setUsefulnessValidate] = useState(true);
 
 	const {courseId} = useParams();
+	const navigate = useNavigate();
 	const reqUrl = `${config.API_URL}/courses/${courseId}`;
 	const postReqUrl = `${config.API_URL}/ratings`;
     const token = "Bearer " + localStorage.getItem("access_token");
@@ -73,16 +74,6 @@ export default function CreateReviewPage() {
 		if (flag) {
 			return;
 		}
-
-		console.log({
-			"term": "2021-2022-1",
-			"courseId": courseId,
-			"overall": overallRating,
-			"workload": workloadRating,
-			"easiness": easinessRating,
-			"usefulness": usefulnessRating,
-			"advice": body,
-		  });
 		
 		//term to be implemented
 		axios.post(postReqUrl, {
@@ -93,9 +84,13 @@ export default function CreateReviewPage() {
 			"easiness": easinessRating,
 			"usefulness": usefulnessRating,
 			"advice": body,
-		  })
+			
+		  }, {headers: {
+			authorization: token,
+		}})
 		  .then(function (response) {
 			console.log(response);
+			navigate(`/courses/${courseId}`);
 		  })
 		  .catch(function (error) {
 			console.log(error);

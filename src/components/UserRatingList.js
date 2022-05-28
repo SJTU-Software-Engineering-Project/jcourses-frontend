@@ -1,6 +1,9 @@
 import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
-import Card from "react-bootstrap/Card";
+import { ListGroup } from "react-bootstrap";
+import RatingCard from "./RatingCard";
+
+const config = require('../utils/config');
 
 export default function UserRatingList(props) {
   return (
@@ -13,12 +16,13 @@ export default function UserRatingList(props) {
         ) : 
         ( props.ratings.length !== 0 ?
             (
-            props.ratings.map(rating => 
-                <Card key={rating._id}>
-                <Card.Body>
-                    ttt
-                </Card.Body>
-                </Card>)
+              <ListGroup>
+              {
+                props.ratings.map(rating => (
+                  <RatingCard rating={rating} key={rating._id} title={config.COURSE_ID_TO_NAME[rating.courseId]}/>
+                )) 
+              }
+              </ListGroup>
             ) :
             (
                 <>

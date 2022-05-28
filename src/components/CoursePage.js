@@ -5,16 +5,20 @@ import Button from "react-bootstrap/Button";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
 import ListGroup from "react-bootstrap/ListGroup";
+import RatingCard from "./RatingCard";
 
 import { API_URL } from "../utils/config";
+import userToNickname from "../utils/utilFunctions";
 
 export default function CoursePage() {
   const {courseId} = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [course, setCourse] = useState();
   const [ratings, setRatings] = useState([]);
+  const [userId, setUserId] = useState();
   const location = useLocation();
   const navigate = useNavigate();
+  const token = "Bearer " + localStorage.getItem("access_token");
 
   useEffect(() => {
     setIsLoading(true);
@@ -26,11 +30,15 @@ export default function CoursePage() {
       const response = await axios.get(`${API_URL}/courses/${courseId}/ratings`);
       setRatings(response.data.data);
     }
-    Promise.all([fetchCourse(), fetchCourseRatings()])
+    async function fetchUser() {
+      const response = await axios.get(`${API_URL}/users/me`,{headers: {authorization: token}});
+      setUserId(response.data.data.id);
+    }
+    Promise.all([fetchCourse(), fetchCourseRatings(),fetchUser()])
       .then(() => setIsLoading(false))
       .catch(error => console.log(error));
     
-  }, [courseId]);
+  }, [courseId, token]);
 
   function handleClickButton() {
     const path = location.pathname + '/new-review';
@@ -56,15 +64,10 @@ export default function CoursePage() {
             <ListGroup>
               {
                 ratings.map(rating => (
-                  <ListGroup.Item key={rating._id}>
-                    <ListGroup horizontal>
-                      <ListGroup.Item>Overall: {rating.overall}</ListGroup.Item>
-                      <ListGroup.Item>Workload: {rating.workload}</ListGroup.Item>
-                      <ListGroup.Item>Easiness: {rating.easiness}</ListGroup.Item>
-                      <ListGroup.Item>Usefulness: {rating.userfulness}</ListGroup.Item>
-                    </ListGroup>
-                    <p>Advice: {rating.advice}</p>
-                  </ListGroup.Item>
+                  <RatingCard 
+                  rating={rating} 
+                  key={rating._id} 
+                  title={userId===rating.userId ? "Me" : userToNickname(rating.userId)}/>
                 ))
               }
             </ListGroup>

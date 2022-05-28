@@ -3,10 +3,15 @@ const API_URL = process.env.REACT_APP_API_URL;
 const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
 const JACCOUNT_ID = process.env.REACT_APP_JACCOUNT_ID;
 const JACCOUNT_URL = process.env.REACT_APP_JACCOUNT_URL;
+const COURSE_ID_TO_NAME = {
+  "C1CDA4487181C122E055F8163EE1DCCC" : "(CS410) 人工智能"
+}
 
 module.exports = {
     CLIENT_URL,
     API_URL,
     JACCOUNT_ID,
-    JACCOUNT_URL
+    JACCOUNT_URL,
+    COURSE_ID_TO_NAME
   }
+
