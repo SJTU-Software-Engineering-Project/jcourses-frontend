@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
 
 import Homepage from "./components/Homepage";
 import CoursePage from "./components/CoursePage";
@@ -9,11 +8,10 @@ import AboutPage from "./components/AboutPage";
 import UserPage from "./components/UserPage";
 import LoginRedirectPage from "./components/LoginRedirectPage";
 import LogoutRedirectPage from "./components/LogoutRedirectPage";
-
 import Navbar from "./components/Navbar";
 import CourseSelector from "./components/CourseSelector";
+import SearchResultPage from "./components/SearchResultPage";
 
-const config = require('./utils/config');
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -36,6 +34,7 @@ function App() {
       <Routes>
 
         <Route path="/" element={<Homepage />} />
+        <Route path="/search" element={<SearchResultPage />} />
 
         <Route path="/about" element={<AboutPage />} />
         <Route path="/user" element={<UserPage />} />

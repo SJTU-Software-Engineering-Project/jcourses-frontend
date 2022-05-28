@@ -1,17 +1,15 @@
-import { useState } from "react";
 import Container from "react-bootstrap/Container";
+import Image from "react-bootstrap/Image";
 
-import CourseList from "./CourseList";
 import Filter from "./Filter";
 
+
 export default function Homepage() {
-  const [courses, setCourses] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <Container className="mx-auto mt-3 p-3">
-      <Filter setCourses={setCourses} setIsLoading={setIsLoading} />
-      <CourseList courses={courses} isLoading={isLoading} />
+      {/* <img src={CLIENT_URL+'/assets/lake.jpeg'} className="image-fluid" width={} /> */}
+      <Filter />
     </Container>
   );
 };

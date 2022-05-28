@@ -1,7 +1,6 @@
 import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
 import { Link } from "react-router-dom";
 
 export default function CourseList(props) {
@@ -32,16 +31,6 @@ export default function CourseList(props) {
                   {course.ratingCount} reviews
                 </Card.Subtitle>
               </Card.Body>
-              
-              {/* <Card.Body>
-                Credits: {course.credits}
-                <ListGroup horizontal>
-                  <ListGroup.Item>Overall: {course.overall}</ListGroup.Item>
-                  <ListGroup.Item>Workload: {course.workload}</ListGroup.Item>
-                  <ListGroup.Item>Easiness: {course.easiness}</ListGroup.Item>
-                  <ListGroup.Item>Usefulness: {course.userfulness}</ListGroup.Item>
-                </ListGroup>
-              </Card.Body> */}
             </Card>)
         )
       }
