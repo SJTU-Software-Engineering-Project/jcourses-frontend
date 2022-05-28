@@ -2,30 +2,22 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import React from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-import { API_URL } from '../utils/config';
+import { CLIENT_URL } from "../utils/config";
 
-export default function Filter(props) {
+export default function Filter() {
   const searchString = React.createRef();
+  const navigate = useNavigate();
 
-  const handleSubmit = async event => {
+  const handleSubmit = event => {
     event.preventDefault();
     const query = searchString.current.value;
-    props.setIsLoading(true);
-    try {
-      const response = await axios.get(`${API_URL}/courses?q=${query}`);
-      console.log(response.data.data)
-      props.setCourses(response.data.data);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      props.setIsLoading(false);
-    }
+    navigate(`/search?q=${query}`);
   };
   return (
-    <Container className='p-3 mb-3 border rounded-3'>
-      <Form className='d-flex flex-row' onSubmit={handleSubmit}>
+    <Container className='p-3 mb-3 d-flex align-items-center justify-content-center border rounded-3' style={{height: '450px', backgroundImage: `url('${CLIENT_URL}/assets/lake.jpeg')`, backgroundSize: '100% 100%'}}>
+      <Form className='d-flex flex-row w-75' onSubmit={handleSubmit}>
         <Form.Control
           ref={searchString}
           placeholder="course code, course name, or teacher name"
