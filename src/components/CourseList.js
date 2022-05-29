@@ -14,7 +14,7 @@ export default function CourseList(props) {
         ) : (
           props.courses.map(course => 
             <Card key={course._id}>
-              <Card.Header className="d-flex justify-content-between align-items-center">
+              <Card.Header className="d-flex justify-content-between">
                 <Link
                   className="text-decoration-none"
                   to={`/courses/${course._id}`}

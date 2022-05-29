@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
 import ListGroup from "react-bootstrap/ListGroup";
+import Card from "react-bootstrap/Card";
 import RatingCard from "./RatingCard";
 
 import { API_URL } from "../utils/config";
@@ -50,51 +51,71 @@ export default function CoursePage({loggedIn}) {
   }
 
   return (
-    <Container className="m-3 p-3">
+    <Container className="mt-3 p-0">
       {
         isLoading ? (
           <Spinner animation="border" role="status">
             <span className="visually-hidden">Loading...</span>
           </Spinner>
         ) : (
-          <>
-            <h2>Course Info</h2>
-            <ListGroup horizontal>
-              <ListGroup.Item>Course Code: {course.code}</ListGroup.Item>
-              <ListGroup.Item>Course Name: {course.name}</ListGroup.Item>
-              <ListGroup.Item>Teacher: {course.teacher}</ListGroup.Item>
+          <Container className="p-0 d-flex justify-content-between align-items-start">
             
-            {
-              loggedIn && (
-                <Button variant="primary" onClick={handleClickButton} className="pull-right"
-                  style={{"marginLeft": "100px"}}                
-                >
-                  {ratings.findIndex(rating => (rating.userId === userId)) !== -1 ? 
-                  "Edit Review for this Course" : "Write Review for this Course" }
-                </Button>
-              )
-            }
-            </ListGroup>
+            <Card className="me-3" style={{width: '30%'}}>
+              <Card.Header>
+                <h3>Course Info</h3>
+              </Card.Header>
+              {/* <Card.Body> */}
+                
+                <ListGroup className="list-group-flush">
+                  <ListGroup.Item>Course Code: {course.code}</ListGroup.Item>
+                  <ListGroup.Item>Course Name: {course.name}</ListGroup.Item>
+                  <ListGroup.Item>Teacher: {course.teacher}</ListGroup.Item>
+                  <ListGroup.Item>Credits: {course.credits}</ListGroup.Item>
+                </ListGroup>
+              {/* </Card.Body> */}
+            </Card>
+
             
-            <h2>Ratings</h2>
-            { ratings.length === 0 ? (<div>No ratings for this course</div>) :
-              (
-              <ListGroup>
-              {
-                ratings.map(rating => (
-                  <RatingCard 
-                  rating={rating} 
-                  key={rating._id} 
-                  title={userId===rating.userId ? "Me" : userToNickname(rating.userId)}
-                  isUser={userId===rating.userId}
-                  />
-                ))
-              }
-              </ListGroup>
-              )
-            }
+            <Card>
+              <Card.Header className="d-flex justify-content-between">
+                <h3>Ratings</h3>
+                {
+                  loggedIn && (
+                    <Button
+                      variant="primary"
+                      onClick={handleClickButton}
+                      className="pull-right"
+                    >
+                      {
+                        ratings.findIndex(rating => (rating.userId === userId)) !== -1 ? "Edit My Review" : "Write Review for this Course" 
+                      }
+                    </Button>
+                  )
+                }
+              </Card.Header>
+              <Card.Body>
+                {
+                  ratings.length === 0 ? (
+                    <div>No ratings for this course</div>
+                  ) : (
+                    <ListGroup>
+                      {
+                        ratings.map(rating => (
+                          <RatingCard 
+                            rating={rating} 
+                            key={rating._id} 
+                            title={userId===rating.userId ? "Me" : userToNickname(rating.userId)}
+                            isUser={userId===rating.userId}
+                          />
+                        ))
+                      }
+                    </ListGroup>
+                  )
+                }
+              </Card.Body>
+            </Card>
             
-          </>
+          </Container>
         )
       }
     </Container>
