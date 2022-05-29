@@ -115,7 +115,7 @@ export default function CoursePage({loggedIn}) {
                           <RatingCard 
                             rating={rating} 
                             key={rating._id} 
-                            title={userId===rating.userId ? "Me" : userToNickname(rating.userId)}
+                            title={`Rated by ${userId===rating.userId ? "Me" : userToNickname(rating.userId)}`}
                             isUser={userId===rating.userId}
                             userVote={getUserVote(voteStatus, rating._id)}
                             loggedIn={loggedIn}
