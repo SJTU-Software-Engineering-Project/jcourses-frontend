@@ -11,6 +11,8 @@ import LogoutRedirectPage from "./components/LogoutRedirectPage";
 import Navbar from "./components/Navbar";
 import CourseSelector from "./components/CourseSelector";
 import SearchResultPage from "./components/SearchResultPage";
+import RatingPage from "./components/RatingPage";
+import EditReviewPage from "./components/EditReviewPage";
 
 
 function App() {
@@ -19,7 +21,6 @@ function App() {
 
   useEffect(() => {
     const access_token = localStorage.getItem('access_token');
-    console.log(access_token);
     if (access_token) {
       setLoggedIn(true);
     } else {
@@ -44,7 +45,10 @@ function App() {
         <Route path="courses/:courseId">
           <Route index element={<CoursePage loggedIn={loggedIn}/>} />
           <Route path="new-review" element={<CreateReviewPage />} /> {/* Route for writing a new review with auto-filled course info */}
+          <Route path="edit-review" element={<EditReviewPage />} /> {/* Route for writing a new review with auto-filled course info */}
         </Route>
+
+        <Route path="/ratings/:ratingId" element={RatingPage}/>
 
         <Route path="new-review" element={<CourseSelector />} /> {/* Route for writing a review without auto-filled course info */}
         

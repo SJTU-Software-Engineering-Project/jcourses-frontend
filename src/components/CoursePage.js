@@ -9,7 +9,7 @@ import Card from "react-bootstrap/Card";
 import RatingCard from "./RatingCard";
 
 import { API_URL } from "../utils/config";
-import userToNickname from "../utils/utilFunctions";
+import {userToNickname, getUserVote} from "../utils/utilFunctions";
 
 export default function CoursePage({loggedIn}) {
   const {courseId} = useParams();
@@ -17,6 +17,7 @@ export default function CoursePage({loggedIn}) {
   const [course, setCourse] = useState();
   const [ratings, setRatings] = useState([]);
   const [userId, setUserId] = useState();
+  const [voteStatus, setVoteStatus] = useState([]); //bad name
   const location = useLocation();
   const navigate = useNavigate();
   const token = "Bearer " + localStorage.getItem("access_token");
@@ -39,11 +40,21 @@ export default function CoursePage({loggedIn}) {
         setUserId(null);
       }
     }
-    Promise.all([fetchCourse(), fetchCourseRatings(),fetchUser()])
-      .then(() => setIsLoading(false))
+    async function fetchVotes() {
+      if (loggedIn) {
+        const response = await axios.get(`${API_URL}/votes/me`,{headers: {authorization: token}});
+        setVoteStatus(response.data.data);
+      } else {
+        setVoteStatus([]);
+      }
+    }
+    Promise.all([fetchCourse(), fetchCourseRatings(),fetchUser(), fetchVotes()])
+      .then(() => {
+        setIsLoading(false);
+      })
       .catch(error => console.log(error));
     
-  }, [courseId, token]);
+  }, [courseId, token, loggedIn]);
 
   function handleClickButton() {
     const path = location.pathname + '/new-review';
@@ -106,6 +117,8 @@ export default function CoursePage({loggedIn}) {
                             key={rating._id} 
                             title={userId===rating.userId ? "Me" : userToNickname(rating.userId)}
                             isUser={userId===rating.userId}
+                            userVote={getUserVote(voteStatus, rating._id)}
+                            loggedIn={loggedIn}
                           />
                         ))
                       }
