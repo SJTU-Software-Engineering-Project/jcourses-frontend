@@ -1,8 +1,8 @@
-import { uniqueNamesGenerator, adjectives, colors, animals } from 'unique-names-generator';
+import { uniqueNamesGenerator, adjectives, animals } from 'unique-names-generator';
 
 const userToNickname = (userId) => {
     const config  = {
-        dictionaries: [adjectives, colors, animals],
+        dictionaries: [adjectives, animals],
         separator: ' ',
         style: 'capital',
         seed: userId,

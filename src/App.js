@@ -42,13 +42,17 @@ function App() {
         <Route path="/loginRedirect" element={<LoginRedirectPage setLoggedIn={setLoggedIn}/>} />
         <Route path="/logoutRedirect" element={<LogoutRedirectPage setLoggedIn={setLoggedIn}/>} />
 
-        <Route path="courses/:courseId">
+        <Route path="/courses/:courseId">
           <Route index element={<CoursePage loggedIn={loggedIn}/>} />
           <Route path="new-review" element={<CreateReviewPage />} /> {/* Route for writing a new review with auto-filled course info */}
-          <Route path="edit-review" element={<EditReviewPage />} /> {/* Route for writing a new review with auto-filled course info */}
+          <Route path="ratings/:ratingId">
+            <Route index element={<RatingPage loggedIn={loggedIn}/>}/>
+            <Route path="edit" element={<EditReviewPage />} />
+          </Route>
         </Route>
 
-        <Route path="/ratings/:ratingId" element={RatingPage}/>
+        
+
 
         <Route path="new-review" element={<CourseSelector />} /> {/* Route for writing a review without auto-filled course info */}
         

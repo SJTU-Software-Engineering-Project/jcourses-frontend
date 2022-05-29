@@ -56,8 +56,14 @@ export default function CoursePage({loggedIn}) {
     
   }, [courseId, token, loggedIn]);
 
-  function handleClickButton() {
+  function handleClickWrite() {
     const path = location.pathname + '/new-review';
+    navigate(path);
+  }
+
+  function handleClickEdit() {
+    const r = ratings.find(rating => (rating.userId === userId));
+    const path = `/courses/${courseId}/ratings/${r._id}/edit`;
     navigate(path);
   }
 
@@ -92,15 +98,18 @@ export default function CoursePage({loggedIn}) {
                 <h3>Ratings</h3>
                 {
                   loggedIn && (
-                    <Button
+                    ratings.findIndex(rating => (rating.userId === userId)) !== -1 ? 
+                      <Button
                       variant="primary"
-                      onClick={handleClickButton}
+                      onClick={handleClickEdit}
                       className="pull-right"
-                    >
-                      {
-                        ratings.findIndex(rating => (rating.userId === userId)) !== -1 ? "Edit My Review" : "Write Review for this Course" 
-                      }
-                    </Button>
+                      > Edit My Review </Button>
+                      : 
+                      <Button
+                      variant="primary"
+                      onClick={handleClickWrite}
+                      className="pull-right"
+                      > Write Review for this Course  </Button>
                   )
                 }
               </Card.Header>

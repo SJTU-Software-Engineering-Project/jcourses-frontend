@@ -8,7 +8,7 @@ import StarRating from './StarRating';
 
 const config = require('../utils/config');
 
-export default function CreateReviewPage() {
+export default function EditReviewPage() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [course, setCourse] = useState();
 
@@ -24,59 +24,51 @@ export default function CreateReviewPage() {
 	const [usefulnessRating, setUsefulnessRating] = useState(0);
 	const [usefulnessHover, setUsefulnessHover] = useState(0);
 	const [usefulnessValidate, setUsefulnessValidate] = useState(true);
+	const [advice, setAdvice] = useState("");
 
-	const {courseId} = useParams();
+
+	const {courseId, ratingId} = useParams();
 	const navigate = useNavigate();
 	const reqUrl = `${config.API_URL}/courses/${courseId}`;
-	const postReqUrl = `${config.API_URL}/ratings`;
+	const reqUrl2 = `${config.API_URL}/ratings/${ratingId}`;
+	const postReqUrl = `${config.API_URL}/ratings/${ratingId}`;
     const token = "Bearer " + localStorage.getItem("access_token");
 
 	useEffect(() => {
-        axios
-            .get(reqUrl, {
-                headers: {
-                    authorization: token,
-                }
-            })
-            .then((res) => {
-                console.log(res.data.data);
-				setCourse(res.data.data)
-                setIsLoading(false);
-            })
-            .catch((error) => {
-                console.log("error " + JSON.stringify(error.response));
-            });
-      }, [reqUrl, token, setIsLoading]);
+        setIsLoading(true);
+
+		async function fetchCourse() {
+			const response = await axios.get(reqUrl);
+			setCourse(response.data.data);
+			
+		}
+		async function fetchRating() {
+			const response = await axios.get(reqUrl2,{headers: {
+				authorization: token,
+			}});
+			const d = response.data.data;
+			setOverallRating(d.overall);
+			setUsefulnessRating(d.usefulness);
+			setEasinessRating(d.easiness);
+			setWorkloadRating(d.workload);
+			setAdvice(d.advice);
+		}
+		Promise.all([fetchCourse(),fetchRating()])
+			.then(() => {
+				console.log("xxx");
+				setIsLoading(false);
+			})
+			.catch(error => console.log(error));
+      }, [reqUrl,reqUrl2, token]);
 
 	async function handleSubmit(e) {
 		e.preventDefault();
 		const formElement = e.currentTarget;
 		const formData = new FormData(formElement);
 		const body = formData.get('body');
-
-		var flag = false;
-		if (overallRating === 0) {
-			setOverallValidate(false);
-			flag = true;
-		}
-		if (workloadRating === 0) {
-			setWorkloadValidate(false);
-			flag = true;
-		}
-		if (easinessRating === 0) {
-			setUsefulnessValidate(false);
-			flag = true;
-		}
-		if (usefulnessRating === 0) {
-			setUsefulnessValidate(false);
-			flag = true;
-		}
-		if (flag) {
-			return;
-		}
 		
 		//term to be implemented
-		axios.post(postReqUrl, {
+		axios.put(postReqUrl, {
 			"term": "2021-2022-1",
 			"courseId": courseId,
 			"overall": overallRating,
@@ -90,7 +82,7 @@ export default function CreateReviewPage() {
 		}})
 		  .then(function (response) {
 			console.log(response);
-			navigate(`/courses/${courseId}`);
+			navigate(`/courses/${courseId}/ratings/${ratingId}`);
 		  })
 		  .catch(function (error) {
 			console.log(error);
@@ -98,7 +90,7 @@ export default function CreateReviewPage() {
 	}
 	return (
 		<Container className="p-3 border rounded-3">
-				<h1>New Review</h1>
+				<h1>Edit Review</h1>
 				<Form onSubmit={handleSubmit}>
 					
 					<div>
@@ -169,6 +161,7 @@ export default function CreateReviewPage() {
 							as="textarea" rows={5}
 							name = "body"
 							placeholder='Enter text'
+							defaultValue={advice}
 						/>
 					</div>
 					

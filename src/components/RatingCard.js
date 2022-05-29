@@ -12,10 +12,9 @@ export default function RatingCard({rating, title, isUser, userVote=0, loggedIn=
     const [upvotes, setUpvotes] = useState(rating.upvotes - rating.downvotes);
     const [status, setStatus] = useState(userVote);
     const navigate = useNavigate();
-    console.log(userVote, "xx");
 
     function handleClickEdit() {
-        navigate(`/courses/${rating.courseId}/edit-review`);
+        navigate(`/courses/${rating.courseId}/ratings/${rating._id}/edit`);
     }
     function handleClickDelete() {
         setShowModal(true);
@@ -24,7 +23,7 @@ export default function RatingCard({rating, title, isUser, userVote=0, loggedIn=
     return (
         <ListGroup.Item>
             <Link
-                to={`/ratings/${rating._id}`}
+                to={`/courses/${rating.courseId}/ratings/${rating._id}`}
             >{title}</Link>
             <ListGroup horizontal>
                 <ListGroup.Item>Overall: {rating.overall} / 5</ListGroup.Item>
@@ -46,7 +45,7 @@ export default function RatingCard({rating, title, isUser, userVote=0, loggedIn=
                 ratingId={rating._id}
             />
             <>Comments: {rating.commentCount}</>
-            {isUser && (
+            {/* {isUser && (
                 <Dropdown>
                     <DeleteModal 
                     show={showModal} 
@@ -65,7 +64,7 @@ export default function RatingCard({rating, title, isUser, userVote=0, loggedIn=
                         </Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
-            )}
+            )} */}
         </ListGroup.Item>
     )
 }
