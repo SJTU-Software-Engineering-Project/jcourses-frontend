@@ -81,15 +81,12 @@ export default function CoursePage({loggedIn}) {
               <Card.Header>
                 <h3>Course Info</h3>
               </Card.Header>
-              {/* <Card.Body> */}
-                
                 <ListGroup className="list-group-flush">
                   <ListGroup.Item>Course Code: {course.code}</ListGroup.Item>
                   <ListGroup.Item>Course Name: {course.name}</ListGroup.Item>
                   <ListGroup.Item>Teacher: {course.teacher}</ListGroup.Item>
                   <ListGroup.Item>Credits: {course.credits}</ListGroup.Item>
                 </ListGroup>
-              {/* </Card.Body> */}
             </Card>
 
             
