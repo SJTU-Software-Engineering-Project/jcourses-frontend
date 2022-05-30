@@ -21,7 +21,7 @@ export default function CourseList(props) {
                 >
                   {course.code}: {course.name} ({course.teacher})
                 </Link>
-                {Math.round(course.overall*100) / 100}
+                Average rating: {Math.round(course.overall*100) / 100}/5
               </Card.Header>
               <Card.Body className="d-flex justify-content-between">
                 <Card.Subtitle className="text-muted">

@@ -142,7 +142,7 @@ export default function RatingPage({loggedIn}) {
                         show={showModal} 
                         setShow={setShowModal} 
                         ratingId={rating._id} 
-                        redirectUrl={"/user"}
+                        redirectUrl={`/courses/${courseId}`}
                         />
                       </div>
                   )
