@@ -93,8 +93,8 @@ export default function CoursePage({loggedIn}) {
             </Card>
 
             
-            <Card>
-              <Card.Header className="d-flex justify-content-between">
+            <Card style={{width: '70%'}}>
+              <Card.Header className="d-flex justify-content-between" >
                 <h3>Ratings</h3>
                 {
                   loggedIn && (

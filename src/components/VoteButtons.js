@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from "react";
+import { Container } from 'react-bootstrap';
+import { AiFillDislike, AiFillLike, AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 
 import { API_URL } from "../utils/config";
 
@@ -67,27 +69,15 @@ export default function VoteButtons (props) {
 		}
 	}
 	return (
-		<>
-			<button
-				className={`btn btn-outline-secondary ml-3 pl-3 pr-3 ${
-					props.status === 1 && 'active'
-				}`}
-				style={{ height: '40px' }}
-				onClick={handleUpvote}
-			>
-				👍
+		<label >
+			<button onClick={handleUpvote} >
+				{props.status === 1 ? <AiFillLike /> : <AiOutlineLike />}
 			</button>
-            {props.upvotes}
-			<button
-				className={`btn btn-outline-secondary ml-3 pl-3 pr-3 ${
-					props.status === -1 && 'active'
-				}`}
-				style={{ height: '40px' }}
-				onClick={handleDownvote}
-			>
-				👎
+            <label className='font-weight-bold mx-0'>{props.upvotes}</label>
+			<button	onClick={handleDownvote} >
+				{props.status === -1 ? <AiFillDislike /> : <AiOutlineDislike />}
 			</button>
-		</>
+		</label>
 	);
 };
 

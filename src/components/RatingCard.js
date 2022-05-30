@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { ListGroup,Dropdown, Card } from "react-bootstrap"
+import { ListGroup,Dropdown, Card, Container } from "react-bootstrap"
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import DeleteModal from "./DeleteModal";
+import { FaRegCommentAlt } from "react-icons/fa";
 import VoteButtons from "./VoteButtons";
 
 const config = require('../utils/config');
@@ -24,6 +24,7 @@ export default function RatingCard({rating, title, isUser, userVote=0, loggedIn=
         <ListGroup.Item>
             <Link
                 to={`/courses/${rating.courseId}/ratings/${rating._id}`}
+                className="h5 font-text-decoration-none"
             >{title}</Link>
             <ListGroup horizontal>
                 <ListGroup.Item>Overall: {rating.overall} / 5</ListGroup.Item>
@@ -37,6 +38,7 @@ export default function RatingCard({rating, title, isUser, userVote=0, loggedIn=
                 <div style={{"whiteSpace": "pre-line"}}>{rating.advice}</div>
                 </Card.Body>
             </Card>
+            <Container className="p-2">
             <VoteButtons 
                 status={status}
                 setStatus={setStatus}
@@ -44,7 +46,9 @@ export default function RatingCard({rating, title, isUser, userVote=0, loggedIn=
                 setUpvotes={setUpvotes}
                 ratingId={rating._id}
             />
-            <>Comments: {rating.commentCount}</>
+            <label className="px-3"><FaRegCommentAlt /> {rating.commentCount} Comments</label>
+            </Container>
+            
             {/* {isUser && (
                 <Dropdown>
                     <DeleteModal 

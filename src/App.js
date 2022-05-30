@@ -51,9 +51,6 @@ function App() {
           </Route>
         </Route>
 
-        
-
-
         <Route path="new-review" element={<CourseSelector />} /> {/* Route for writing a review without auto-filled course info */}
         
       </Routes>
