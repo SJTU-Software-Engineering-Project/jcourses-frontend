@@ -14,7 +14,7 @@ export default function Filter() {
   };
   
   return (
-    <Form className='d-flex flex-row w-50' onSubmit={handleSubmit}>
+    <Form className='d-flex flex-row' onSubmit={handleSubmit}>
       <Form.Control
         ref={searchString}
         placeholder="course code, course name, or teacher name"
