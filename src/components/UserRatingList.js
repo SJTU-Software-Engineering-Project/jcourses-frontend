@@ -8,35 +8,33 @@ const config = require('../utils/config');
 
 export default function UserRatingList(props) {
   return (
-    <Container className="p-3 border rounded-3">
+    <Container className="p-0">
       {
         props.isLoading ? (
           <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
+            <span className="visually-hidden">Loading my reviews...</span>
           </Spinner>
-        ) : 
-        ( props.ratings.length !== 0 ?
-            (
-              <ListGroup>
+        ) : (
+          props.ratings.length !== 0 ? (
+            <ListGroup>
               {
                 props.ratings.map(rating => (
                   <RatingCard 
-                  rating={rating} 
-                  key={rating._id} 
-                  title={config.COURSE_ID_TO_NAME[rating.courseId] || "Unkown"} 
-                  isUser={true}
-                  userVote={getUserVote(props.voteStatus, rating._id)}
+                    rating={rating} 
+                    key={rating._id} 
+                    title={config.COURSE_ID_TO_NAME[rating.courseId] || "Unknown"} 
+                    isUser={true}
+                    userVote={getUserVote(props.voteStatus, rating._id)}
                   />
                 )) 
               }
-              </ListGroup>
-            ) :
-            (
-                <>
-                    <p>No reviews yet!</p>
-                    <a href='new-review'>Create one here.</a>
-                </>
-            )
+            </ListGroup>
+          ) : (
+            <>
+                <p>No reviews yet!</p>
+                <a href='new-review'>Create one here.</a>
+            </>
+          )
         )
       }
     </Container>
