@@ -46,7 +46,7 @@ export default function CommentList({ratingId, userId, token}) {
                 <Card key={comment._id}>
                 <Card.Header className="d-flex justify-content-between">
                     #{i+1}{" "}{userId === comment.userId ? "Me" : userToNickname(comment.userId)}:
-                    {userId === comment.userId && <FaRegTrashAlt onClick={() => {handleDelete(comment._id)}} />}
+                    {/*userId === comment.userId*/ false && <FaRegTrashAlt onClick={() => {handleDelete(comment._id)}} />}
                 </Card.Header>
                 <Card.Body className="d-flex justify-content-between">
                     {comment.body}

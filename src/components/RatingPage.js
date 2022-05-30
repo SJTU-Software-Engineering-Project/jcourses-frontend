@@ -6,6 +6,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import {Card, ListGroup, Form, Spinner } from "react-bootstrap";
 import DeleteModal from "./DeleteModal";
 import VoteButtons from "./VoteButtons";
+import { FaRegCommentAlt } from "react-icons/fa";
 
 import { API_URL } from "../utils/config";
 import {userToNickname, getUserVote} from "../utils/utilFunctions";
@@ -122,7 +123,7 @@ export default function RatingPage({loggedIn}) {
               {/* </Card.Body> */}
             </Card>
 
-            <Card>
+            <Card style={{width: '70%'}}>
               <Card.Header className="d-flex justify-content-between">
                 <h3>{course.name} review by {rating.userId === userId ? 
                     "Me" : userToNickname(rating.userId)}</h3>
@@ -167,8 +168,8 @@ export default function RatingPage({loggedIn}) {
                     setUpvotes={setUpvotes}
                     ratingId={rating._id}
                 />
-                <>Comments: {rating.commentCount}</>
-                <Form onSubmit={handleComment}>
+                <label className="p-2"><FaRegCommentAlt /> {rating.commentCount} Comments</label>
+                <Form onSubmit={handleComment} className="py-2">
                     <Card>
                         <Card.Header>Comment:</Card.Header>
                         <Form.Control
@@ -187,6 +188,7 @@ export default function RatingPage({loggedIn}) {
                         />
                     </Card>
                 </Form>
+                <h5>Comments</h5>
                 <CommentList
                     ratingId={ratingId}
                     userId={userId}
