@@ -24,15 +24,15 @@ export default function RatingCard({rating, title, isUser, userVote=0, loggedIn=
         <ListGroup.Item>
             <Link
                 to={`/courses/${rating.courseId}/ratings/${rating._id}`}
-                className="h5 font-text-decoration-none"
+                className="h5 text-decoration-none"
             >{title}</Link>
-            <ListGroup horizontal>
+            <ListGroup className="mt-2" horizontal>
                 <ListGroup.Item>Overall: {rating.overall} / 5</ListGroup.Item>
                 <ListGroup.Item>Workload: {rating.workload} / 5</ListGroup.Item>
                 <ListGroup.Item>Easiness: {rating.easiness} / 5</ListGroup.Item>
                 <ListGroup.Item>Usefulness: {rating.usefulness} / 5</ListGroup.Item>
             </ListGroup>
-            <Card>
+            <Card className="mt-2">
                 <Card.Body>
                 <div>Advice:</div>
                 <div style={{"whiteSpace": "pre-line"}}>{rating.advice}</div>

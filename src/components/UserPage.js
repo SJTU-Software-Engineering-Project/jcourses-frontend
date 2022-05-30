@@ -45,9 +45,13 @@ export default function UserPage() {
       }, [reqUrl, reqUrl2, token]);
   
     return (
-        <Container className="p-3 border rounded-3">
-        <h1>My Reviews</h1>
-        <UserRatingList isLoading={isLoading} ratings={ratings} voteStatus={voteStatus} />
+      <Container className="mt-3 p-3">
+        <h3>My Reviews</h3>
+        <UserRatingList
+          isLoading={isLoading}
+          ratings={ratings}
+          voteStatus={voteStatus} 
+        />
       </Container>
     );
   };
