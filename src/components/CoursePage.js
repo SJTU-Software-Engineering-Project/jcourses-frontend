@@ -81,21 +81,18 @@ export default function CoursePage({loggedIn}) {
               <Card.Header>
                 <h3>Course Info</h3>
               </Card.Header>
-              {/* <Card.Body> */}
-                
                 <ListGroup className="list-group-flush">
                   <ListGroup.Item>Course Code: {course.code}</ListGroup.Item>
                   <ListGroup.Item>Course Name: {course.name}</ListGroup.Item>
                   <ListGroup.Item>Teacher: {course.teacher}</ListGroup.Item>
                   <ListGroup.Item>Credits: {course.credits}</ListGroup.Item>
                 </ListGroup>
-              {/* </Card.Body> */}
             </Card>
 
             
             <Card style={{width: '70%'}}>
               <Card.Header className="d-flex justify-content-between" >
-                <h3>Ratings</h3>
+                <h3>Reviews</h3>
                 {
                   loggedIn && (
                     ratings.findIndex(rating => (rating.userId === userId)) !== -1 ? 
@@ -124,7 +121,7 @@ export default function CoursePage({loggedIn}) {
                           <RatingCard 
                             rating={rating} 
                             key={rating._id} 
-                            title={`Rated by ${userId===rating.userId ? "Me" : userToNickname(rating.userId)}`}
+                            title={`${userId===rating.userId ? "Me" : userToNickname(rating.userId)}`}
                             isUser={userId===rating.userId}
                             userVote={getUserVote(voteStatus, rating._id)}
                             loggedIn={loggedIn}

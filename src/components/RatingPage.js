@@ -110,7 +110,7 @@ export default function RatingPage({loggedIn}) {
             
             <Card className="me-3" style={{width: '30%'}}>
               <Card.Header>
-                <Link to={`/courses/${rating.courseId}`} className='h3'>Course Info</Link>
+                <Link to={`/courses/${rating.courseId}`} className='h3 text-decoration-none'>Course Info</Link>
               </Card.Header>
               {/* <Card.Body> */}
                 

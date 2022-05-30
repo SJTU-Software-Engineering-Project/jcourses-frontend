@@ -1,15 +1,18 @@
 import Container from "react-bootstrap/Container";
-import Image from "react-bootstrap/Image";
 
 import Filter from "./Filter";
-
+import { CLIENT_URL } from "../utils/config";
 
 export default function Homepage() {
 
   return (
-    <Container className="mx-auto mt-3 p-3">
-      {/* <img src={CLIENT_URL+'/assets/lake.jpeg'} className="image-fluid" width={} /> */}
-      <Filter />
-    </Container>
+    <div className="m-0 p-0 container-fluid d-flex justify-content-center align-items-center" style={{height: '560px', backgroundImage: `url('${CLIENT_URL}/assets/lake.jpeg')`, backgroundSize: 'cover'}}>
+      <div>
+        <p className="lead">
+          <em>Course review platform of the students, by the students, for the students</em>
+        </p>
+        <Filter />
+      </div>
+    </div>
   );
 };
