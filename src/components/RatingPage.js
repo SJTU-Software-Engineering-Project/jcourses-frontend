@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import {Card, ListGroup, Form, Spinner } from "react-bootstrap";
 import DeleteModal from "./DeleteModal";
 import VoteButtons from "./VoteButtons";
@@ -110,7 +110,7 @@ export default function RatingPage({loggedIn}) {
             
             <Card className="me-3" style={{width: '30%'}}>
               <Card.Header>
-                <h3>Course Info</h3>
+                <Link to={`/courses/${rating.courseId}`} className='h3'>Course Info</Link>
               </Card.Header>
               {/* <Card.Body> */}
                 
